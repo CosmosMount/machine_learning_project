@@ -1,0 +1,4 @@
+Model,Best_CV_F1_macro,Best_Params
+Group_LogisticRegression_tuned,0.8506215019204152,"{'model__C': 3.0, 'model__class_weight': 'balanced'}"
+Group_HistGradientBoosting_tuned,0.8505920830703202,"{'model__class_weight': 'balanced', 'model__l2_regularization': 0.01, 'model__learning_rate': 0.08, 'model__max_iter': 180, 'model__max_leaf_nodes': 15}"
+Group_RandomForest_tuned,0.8473286916560726,"{'model__class_weight': 'balanced_subsample', 'model__max_depth': None, 'model__max_features': 'sqrt', 'model__min_samples_leaf': 1}"

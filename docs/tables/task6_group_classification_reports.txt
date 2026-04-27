@@ -1,0 +1,33 @@
+
+================================================================================
+Group_LogisticRegression_tuned
+              precision    recall  f1-score   support
+
+     At-Risk       0.87      0.83      0.85       665
+    Graduate       0.84      0.88      0.86       663
+
+    accuracy                           0.85      1328
+   macro avg       0.85      0.85      0.85      1328
+weighted avg       0.85      0.85      0.85      1328
+
+================================================================================
+Group_RandomForest_tuned
+              precision    recall  f1-score   support
+
+     At-Risk       0.87      0.83      0.85       665
+    Graduate       0.84      0.88      0.86       663
+
+    accuracy                           0.85      1328
+   macro avg       0.85      0.85      0.85      1328
+weighted avg       0.85      0.85      0.85      1328
+
+================================================================================
+Group_HistGradientBoosting_tuned
+              precision    recall  f1-score   support
+
+     At-Risk       0.87      0.83      0.85       665
+    Graduate       0.84      0.87      0.85       663
+
+    accuracy                           0.85      1328
+   macro avg       0.85      0.85      0.85      1328
+weighted avg       0.85      0.85      0.85      1328

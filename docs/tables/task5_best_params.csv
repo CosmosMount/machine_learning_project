@@ -1,0 +1,10 @@
+Model,Best_CV_F1_macro,Best_Params
+HistGradientBoosting_tuned,0.7175501716971342,"{'model__class_weight': 'balanced', 'model__l2_regularization': 0.01, 'model__learning_rate': 0.04, 'model__max_iter': 160, 'model__max_leaf_nodes': 15}"
+RandomForest_tuned,0.7145517752884377,"{'model__class_weight': 'balanced_subsample', 'model__max_depth': 14, 'model__max_features': 'sqrt', 'model__min_samples_leaf': 1}"
+ExtraTrees_tuned,0.7134772991267142,"{'model__class_weight': 'balanced', 'model__max_depth': 14, 'model__max_features': 'sqrt', 'model__min_samples_leaf': 1}"
+LogisticRegression_tuned,0.7082115299381798,"{'model__C': 3.0, 'model__class_weight': 'balanced'}"
+RBF_SVM_tuned,0.7080489673091078,"{'model__C': 3.0, 'model__class_weight': 'balanced', 'model__gamma': 'scale'}"
+LinearSVM_tuned,0.7063164556771911,"{'model__C': 0.1, 'model__class_weight': 'balanced'}"
+GradientBoosting_tuned,0.702628916595127,"{'model__learning_rate': 0.08, 'model__max_depth': 3, 'model__min_samples_leaf': 1, 'model__n_estimators': 180}"
+DecisionTree_tuned,0.6783076650744426,"{'model__class_weight': 'balanced', 'model__max_depth': 5, 'model__min_samples_leaf': 10, 'model__min_samples_split': 2}"
+MLP_tuned,0.6743936215047854,"{'model__alpha': 0.003, 'model__hidden_layer_sizes': (64,), 'model__learning_rate_init': 0.001}"
