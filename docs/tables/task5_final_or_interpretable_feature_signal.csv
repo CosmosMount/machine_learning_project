@@ -1,21 +1,21 @@
 Model,Signal_Type,Feature,Signal
-RandomForest_tuned,Feature importance,num__approval_rate_2nd,0.11090615168992529
-RandomForest_tuned,Feature importance,num__approval_rate_1st,0.07592046124385313
-RandomForest_tuned,Feature importance,num__Curricular units 2nd sem (approved),0.07337083650537464
-RandomForest_tuned,Feature importance,num__Curricular units 2nd sem (grade),0.0703245164857531
-RandomForest_tuned,Feature importance,num__Curricular units 1st sem (grade),0.0523448706335586
-RandomForest_tuned,Feature importance,num__Curricular units 1st sem (approved),0.051536365924308325
-RandomForest_tuned,Feature importance,bin__Tuition fees up to date,0.03922704702750863
-RandomForest_tuned,Feature importance,num__Curricular units 2nd sem (evaluations),0.034818476098359204
-RandomForest_tuned,Feature importance,num__grade_trend,0.0342546836977998
-RandomForest_tuned,Feature importance,num__Admission grade,0.032853074088968086
-RandomForest_tuned,Feature importance,num__Age at enrollment,0.03119275354736097
-RandomForest_tuned,Feature importance,num__Previous qualification (grade),0.029267116209389276
-RandomForest_tuned,Feature importance,num__Curricular units 1st sem (evaluations),0.02839151258887367
-RandomForest_tuned,Feature importance,num__Curricular units 2nd sem (enrolled),0.02189109994864911
-RandomForest_tuned,Feature importance,num__GDP,0.018691699484677807
-RandomForest_tuned,Feature importance,num__Unemployment rate,0.01850046628851339
-RandomForest_tuned,Feature importance,num__Inflation rate,0.017611013062707483
-RandomForest_tuned,Feature importance,bin__Scholarship holder,0.016067694926613394
-RandomForest_tuned,Feature importance,num__Application order,0.010548543744313526
-RandomForest_tuned,Feature importance,bin__Debtor,0.010381938214445663
+ExtraTrees_tuned,Feature importance,num__approval_rate_2nd,0.21312310970586743
+ExtraTrees_tuned,Feature importance,num__Curricular units 2nd sem (grade),0.08718305357925143
+ExtraTrees_tuned,Feature importance,num__approval_rate_1st,0.07689920926849611
+ExtraTrees_tuned,Feature importance,bin__Tuition fees up to date,0.07203394556789748
+ExtraTrees_tuned,Feature importance,num__Curricular units 2nd sem (approved),0.0640720022099279
+ExtraTrees_tuned,Feature importance,bin__Scholarship holder,0.022481160674988905
+ExtraTrees_tuned,Feature importance,num__Curricular units 1st sem (grade),0.02190073684586502
+ExtraTrees_tuned,Feature importance,num__Curricular units 1st sem (approved),0.021089498855113218
+ExtraTrees_tuned,Feature importance,cat__Course_171,0.018366956878736834
+ExtraTrees_tuned,Feature importance,num__GDP,0.016040170998536364
+ExtraTrees_tuned,Feature importance,num__Curricular units 2nd sem (enrolled),0.015052656816918013
+ExtraTrees_tuned,Feature importance,num__Unemployment rate,0.013253519312318688
+ExtraTrees_tuned,Feature importance,num__Admission grade,0.012503312790222841
+ExtraTrees_tuned,Feature importance,num__Inflation rate,0.0122747398716751
+ExtraTrees_tuned,Feature importance,num__Previous qualification (grade),0.012055311169205737
+ExtraTrees_tuned,Feature importance,num__Age at enrollment,0.011620952613903387
+ExtraTrees_tuned,Feature importance,num__grade_trend,0.01118413553476431
+ExtraTrees_tuned,Feature importance,num__Curricular units 2nd sem (evaluations),0.010768976047017206
+ExtraTrees_tuned,Feature importance,bin__Debtor,0.010318747116919326
+ExtraTrees_tuned,Feature importance,cat__Course_9238,0.010035859380411944

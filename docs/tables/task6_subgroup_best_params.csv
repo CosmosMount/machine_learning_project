@@ -1,5 +1,5 @@
 Model,Best_CV_F1_macro,Best_Params
-Subgroup_HistGradientBoosting_tuned,0.7721677391278359,"{'model__class_weight': 'balanced', 'model__l2_regularization': 0.01, 'model__learning_rate': 0.04, 'model__max_iter': 120, 'model__max_leaf_nodes': 15}"
-Subgroup_RandomForest_tuned,0.7709661787460365,"{'model__class_weight': 'balanced_subsample', 'model__max_depth': 12, 'model__max_features': 'sqrt', 'model__min_samples_leaf': 1}"
-Subgroup_LogisticRegression_tuned,0.7684823148044865,"{'model__C': 1.0, 'model__class_weight': 'balanced'}"
-Subgroup_RBF_SVM_tuned,0.768481218452963,"{'model__C': 3.0, 'model__gamma': 'scale'}"
+Subgroup_HistGradientBoosting_tuned,0.7726794836263668,"{'model__class_weight': 'balanced', 'model__l2_regularization': 0.0, 'model__learning_rate': 0.04, 'model__max_iter': 120, 'model__max_leaf_nodes': 15}"
+Subgroup_RandomForest_tuned,0.7725917725083647,"{'model__class_weight': 'balanced_subsample', 'model__max_depth': 14, 'model__max_features': 'sqrt', 'model__min_samples_leaf': 4}"
+Subgroup_RBF_SVM_tuned,0.7696134411234684,"{'model__C': 3.0, 'model__class_weight': 'balanced', 'model__gamma': 0.03}"
+Subgroup_LogisticRegression_tuned,0.7684823148044866,"{'model__C': 1.0, 'model__class_weight': 'balanced'}"
