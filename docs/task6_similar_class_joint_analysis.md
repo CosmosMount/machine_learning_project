@@ -53,6 +53,10 @@ The centroid-distance evidence shows why this extension must be interpreted care
 
 The dedicated At-Risk model should be discussed as an intervention-oriented model, not as a replacement for the final Task 5 three-class classifier. Its purpose is to answer a different question: whether a student is likely to require attention, regardless of whether the final label is `Dropout` or `Enrolled`. The result is a trade-off rather than a simple win: dedicated binary modeling raises At-Risk precision and macro-F1, while the collapsed Task 5 model keeps higher At-Risk recall. The subgroup model then shows how difficult it remains to separate the two At-Risk classes. This supports the broader project conclusion that moderate macro-F1 is not simply a modeling failure; it reflects genuine overlap in the student outcome structure.
 
+Overall, the unsupervised and supervised analyses are comprehensive within the course-project scope. The unsupervised section tests whether the outcome labels correspond to natural clusters, while the supervised section tests whether predictive models can exploit weaker class structure. The two-stage At-Risk analysis further isolates the main confusion source. Together, these experiments provide consistent evidence that the remaining performance limitation is mainly due to intrinsic class overlap, especially around `Enrolled`, rather than a single preprocessing or modeling defect.
+
+This should not be interpreted as an exhaustive search over all possible machine-learning methods. A more precise conclusion is that the project conducted a broad and methodologically controlled comparison under the assignment constraints. Further improvements could investigate nested cross-validation, systematic resampling or threshold tuning for `Enrolled`, calibrated probabilities, cost-sensitive decision rules, and specialized tabular boosting libraries such as XGBoost, LightGBM, or CatBoost.
+
 ## Saved Outputs
 
 Tables:

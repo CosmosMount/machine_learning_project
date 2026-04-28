@@ -69,9 +69,9 @@ All models are evaluated using:
 
 | Model | CV F1 Macro Mean | CV F1 Macro Std | Test Accuracy | Test Precision Macro | Test Recall Macro | Test F1 Macro |
 |---|---:|---:|---:|---:|---:|---:|
-| GradientBoosting | 0.7008 | 0.0079 | 0.7779 | 0.7235 | 0.7003 | 0.7082 |
+| GradientBoosting | 0.7010 | 0.0081 | 0.7764 | 0.7213 | 0.6990 | 0.7067 |
 | RBF_SVM_balanced | 0.7127 | 0.0097 | 0.7485 | 0.7067 | 0.7128 | 0.7054 |
-| LogisticRegression_balanced | 0.7084 | 0.0109 | 0.7349 | 0.7051 | 0.7107 | 0.6985 |
+| LogisticRegression_balanced | 0.7082 | 0.0118 | 0.7364 | 0.7065 | 0.7120 | 0.7000 |
 | LinearSVM_balanced | 0.7029 | 0.0109 | 0.7553 | 0.7021 | 0.6931 | 0.6963 |
 | ExtraTrees_balanced | 0.6961 | 0.0074 | 0.7733 | 0.7237 | 0.6843 | 0.6953 |
 | RandomForest_balanced | 0.6831 | 0.0075 | 0.7741 | 0.7260 | 0.6805 | 0.6909 |
@@ -81,7 +81,7 @@ All models are evaluated using:
 
 Best held-out test macro-F1:
 
-- `GradientBoosting`, test F1-macro = `0.7082`.
+- `GradientBoosting`, test F1-macro = `0.7067`.
 
 Best CV macro-F1:
 
@@ -151,4 +151,4 @@ Generated tables:
 
 ## 9. Report-Ready Summary
 
-We first trained the two required simple model classes, Logistic Regression and Decision Tree, using a 70/30 stratified split and leakage-free pipelines. Logistic Regression generalized well with test macro-F1 `0.6985`, while the default Decision Tree overfit heavily, achieving training macro-F1 `1.0000` but test macro-F1 only `0.6280`. To exceed the baseline requirement, we then compared seven additional advanced models: Random Forest, ExtraTrees, Gradient Boosting, HistGradientBoosting, Linear SVM, RBF SVM, and MLP. Gradient Boosting achieved the best held-out test macro-F1 (`0.7082`), while RBF SVM and HistGradientBoosting showed strong cross-validation performance. The PCA-2D boundary plot is used only to visualize simplified decision regions; final metrics use the full feature matrix. These results demonstrate that boosting and kernel methods improve over simple baselines, but class overlap and the minority `Enrolled` class remain the central challenge.
+We first trained the two required simple model classes, Logistic Regression and Decision Tree, using a 70/30 stratified split and leakage-free pipelines. Logistic Regression generalized well with test macro-F1 `0.7000`, while the default Decision Tree overfit heavily, achieving training macro-F1 `1.0000` but test macro-F1 only `0.6280`. To exceed the baseline requirement, we then compared seven additional advanced models: Random Forest, ExtraTrees, Gradient Boosting, HistGradientBoosting, Linear SVM, RBF SVM, and MLP. Gradient Boosting achieved the best held-out test macro-F1 (`0.7067`), while RBF SVM and HistGradientBoosting showed strong cross-validation performance. The PCA-2D boundary plot is used only to visualize simplified decision regions; final metrics use the full feature matrix. These results demonstrate that boosting and kernel methods improve over simple baselines, but class overlap and the minority `Enrolled` class remain the central challenge.
