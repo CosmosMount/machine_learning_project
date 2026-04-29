@@ -1,0 +1,3960 @@
+Preprocessing
+¶
+
+---BLOCK---
+
+Missing-value Check
+¶
+
+---BLOCK---
+
+# Import fundamental libraries
+import
+pandas
+as
+pd
+import
+numpy
+as
+np
+import
+matplotlib.pyplot
+as
+plt
+import
+seaborn
+as
+sns
+# Load the dataset
+# Note: The dataset uses a semicolon ';' as the separator instead of a comma.
+file_path
+=
+'data.csv'
+# Adjust the path if your data is in a 'data/' folder
+df
+=
+pd
+.
+read_csv
+(
+file_path
+,
+sep
+=
+';'
+)
+# Display the first few rows to ensure correct loading
+display
+(
+df
+.
+head
+())
+# Examine missing values across all columns
+print
+(
+"--- Missing Values Check ---"
+)
+missing_values
+=
+df
+.
+isnull
+()
+.
+sum
+()
+# Filter and show only columns that actually have missing values (if any)
+columns_with_missing
+=
+missing_values
+[
+missing_values
+>
+0
+]
+if
+not
+columns_with_missing
+.
+empty
+:
+print
+(
+"Columns with missing values and their counts:"
+)
+print
+(
+columns_with_missing
+)
+else
+:
+print
+(
+"Great news! There are NO missing values in the entire dataset."
+)
+# Verify total missing values as a double-check
+total_missing
+=
+df
+.
+isnull
+()
+.
+sum
+()
+.
+sum
+()
+print
+(
+f
+"
+\n
+Total missing values in the dataset:
+{
+total_missing
+}
+"
+)
+# Check basic dataset info (data types, non-null counts)
+print
+(
+"
+\n
+--- Dataset Info ---"
+)
+df
+.
+info
+()
+
+---BLOCK---
+
+Marital status
+Application mode
+Application order
+Course
+Daytime/evening attendance\t
+Previous qualification
+Previous qualification (grade)
+Nacionality
+Mother's qualification
+Father's qualification
+...
+Curricular units 2nd sem (credited)
+Curricular units 2nd sem (enrolled)
+Curricular units 2nd sem (evaluations)
+Curricular units 2nd sem (approved)
+Curricular units 2nd sem (grade)
+Curricular units 2nd sem (without evaluations)
+Unemployment rate
+Inflation rate
+GDP
+Target
+0
+1
+17
+5
+171
+1
+1
+122.0
+1
+19
+12
+...
+0
+0
+0
+0
+0.000000
+0
+10.8
+1.4
+1.74
+Dropout
+1
+1
+15
+1
+9254
+1
+1
+160.0
+1
+1
+3
+...
+0
+6
+6
+6
+13.666667
+0
+13.9
+-0.3
+0.79
+Graduate
+2
+1
+1
+5
+9070
+1
+1
+122.0
+1
+37
+37
+...
+0
+6
+0
+0
+0.000000
+0
+10.8
+1.4
+1.74
+Dropout
+3
+1
+17
+2
+9773
+1
+1
+122.0
+1
+38
+37
+...
+0
+6
+10
+5
+12.400000
+0
+9.4
+-0.8
+-3.12
+Graduate
+4
+2
+39
+1
+8014
+0
+1
+100.0
+1
+37
+38
+...
+0
+6
+6
+6
+13.000000
+0
+13.9
+-0.3
+0.79
+Graduate
+
+---BLOCK---
+
+5 rows × 37 columns
+
+---BLOCK---
+
+--- Missing Values Check ---
+Great news! There are NO missing values in the entire dataset.
+
+Total missing values in the dataset: 0
+
+--- Dataset Info ---
+<class 'pandas.DataFrame'>
+RangeIndex: 4424 entries, 0 to 4423
+Data columns (total 37 columns):
+ #   Column                                          Non-Null Count  Dtype  
+---  ------                                          --------------  -----  
+ 0   Marital status                                  4424 non-null   int64  
+ 1   Application mode                                4424 non-null   int64  
+ 2   Application order                               4424 non-null   int64  
+ 3   Course                                          4424 non-null   int64  
+ 4   Daytime/evening attendance	                     4424 non-null   int64  
+ 5   Previous qualification                          4424 non-null   int64  
+ 6   Previous qualification (grade)                  4424 non-null   float64
+ 7   Nacionality                                     4424 non-null   int64  
+ 8   Mother's qualification                          4424 non-null   int64  
+ 9   Father's qualification                          4424 non-null   int64  
+ 10  Mother's occupation                             4424 non-null   int64  
+ 11  Father's occupation                             4424 non-null   int64  
+ 12  Admission grade                                 4424 non-null   float64
+ 13  Displaced                                       4424 non-null   int64  
+ 14  Educational special needs                       4424 non-null   int64  
+ 15  Debtor                                          4424 non-null   int64  
+ 16  Tuition fees up to date                         4424 non-null   int64  
+ 17  Gender                                          4424 non-null   int64  
+ 18  Scholarship holder                              4424 non-null   int64  
+ 19  Age at enrollment                               4424 non-null   int64  
+ 20  International                                   4424 non-null   int64  
+ 21  Curricular units 1st sem (credited)             4424 non-null   int64  
+ 22  Curricular units 1st sem (enrolled)             4424 non-null   int64  
+ 23  Curricular units 1st sem (evaluations)          4424 non-null   int64  
+ 24  Curricular units 1st sem (approved)             4424 non-null   int64  
+ 25  Curricular units 1st sem (grade)                4424 non-null   float64
+ 26  Curricular units 1st sem (without evaluations)  4424 non-null   int64  
+ 27  Curricular units 2nd sem (credited)             4424 non-null   int64  
+ 28  Curricular units 2nd sem (enrolled)             4424 non-null   int64  
+ 29  Curricular units 2nd sem (evaluations)          4424 non-null   int64  
+ 30  Curricular units 2nd sem (approved)             4424 non-null   int64  
+ 31  Curricular units 2nd sem (grade)                4424 non-null   float64
+ 32  Curricular units 2nd sem (without evaluations)  4424 non-null   int64  
+ 33  Unemployment rate                               4424 non-null   float64
+ 34  Inflation rate                                  4424 non-null   float64
+ 35  GDP                                             4424 non-null   float64
+ 36  Target                                          4424 non-null   str    
+dtypes: float64(7), int64(29), str(1)
+memory usage: 1.2 MB
+
+---BLOCK---
+
+One-hot Encoding
+¶
+
+---BLOCK---
+
+# Define the multi-class categorical columns to be one-hot encoded
+cat_cols
+=
+[
+'Marital status'
+,
+'Application mode'
+,
+'Course'
+,
+'Previous qualification'
+,
+'Nacionality'
+,
+"Mother's qualification"
+,
+"Father's qualification"
+,
+"Mother's occupation"
+,
+"Father's occupation"
+]
+# Convert these columns to string type so pandas treats them as categories
+df
+[
+cat_cols
+]
+=
+df
+[
+cat_cols
+]
+.
+astype
+(
+str
+)
+# Apply One-Hot Encoding
+# dtype=int ensures the new dummy columns are 0/1 integers instead of True/False booleans
+df_encoded
+=
+pd
+.
+get_dummies
+(
+df
+,
+columns
+=
+cat_cols
+,
+dtype
+=
+int
+)
+# Display the shape change
+print
+(
+f
+"Original dataset shape:
+{
+df
+.
+shape
+}
+"
+)
+print
+(
+f
+"Dataset shape after One-Hot Encoding:
+{
+df_encoded
+.
+shape
+}
+"
+)
+# Inspect the new dataset and the newly generated dummy columns
+display
+(
+df_encoded
+.
+head
+())
+
+---BLOCK---
+
+Original dataset shape: (4424, 37)
+Dataset shape after One-Hot Encoding: (4424, 248)
+
+---BLOCK---
+
+Application order
+Daytime/evening attendance\t
+Previous qualification (grade)
+Admission grade
+Displaced
+Educational special needs
+Debtor
+Tuition fees up to date
+Gender
+Scholarship holder
+...
+Father's occupation_2
+Father's occupation_3
+Father's occupation_4
+Father's occupation_5
+Father's occupation_6
+Father's occupation_7
+Father's occupation_8
+Father's occupation_9
+Father's occupation_90
+Father's occupation_99
+0
+5
+1
+122.0
+127.3
+1
+0
+0
+1
+1
+0
+...
+0
+0
+0
+0
+0
+0
+0
+1
+0
+0
+1
+1
+1
+160.0
+142.5
+1
+0
+0
+0
+1
+0
+...
+0
+1
+0
+0
+0
+0
+0
+0
+0
+0
+2
+5
+1
+122.0
+124.8
+1
+0
+0
+0
+1
+0
+...
+0
+0
+0
+0
+0
+0
+0
+1
+0
+0
+3
+2
+1
+122.0
+119.6
+1
+0
+0
+1
+0
+0
+...
+0
+1
+0
+0
+0
+0
+0
+0
+0
+0
+4
+1
+0
+100.0
+141.5
+0
+0
+0
+1
+0
+0
+...
+0
+0
+0
+0
+0
+0
+0
+1
+0
+0
+
+---BLOCK---
+
+5 rows × 248 columns
+
+---BLOCK---
+
+Standardize Continuous Features
+¶
+
+---BLOCK---
+
+from
+sklearn.preprocessing
+import
+StandardScaler
+# Define the continuous columns that require standardization
+continuous_cols
+=
+[
+'Previous qualification (grade)'
+,
+'Admission grade'
+,
+'Age at enrollment'
+,
+'Curricular units 1st sem (credited)'
+,
+'Curricular units 1st sem (enrolled)'
+,
+'Curricular units 1st sem (evaluations)'
+,
+'Curricular units 1st sem (approved)'
+,
+'Curricular units 1st sem (grade)'
+,
+'Curricular units 1st sem (without evaluations)'
+,
+'Curricular units 2nd sem (credited)'
+,
+'Curricular units 2nd sem (enrolled)'
+,
+'Curricular units 2nd sem (evaluations)'
+,
+'Curricular units 2nd sem (approved)'
+,
+'Curricular units 2nd sem (grade)'
+,
+'Curricular units 2nd sem (without evaluations)'
+,
+'Unemployment rate'
+,
+'Inflation rate'
+,
+'GDP'
+]
+# Initialize the StandardScaler
+scaler
+=
+StandardScaler
+()
+# Fit and transform the continuous features in our encoded dataframe
+df_encoded
+[
+continuous_cols
+]
+=
+scaler
+.
+fit_transform
+(
+df_encoded
+[
+continuous_cols
+])
+# Verify the standardization by checking the mean and standard deviation
+display
+(
+df_encoded
+[
+continuous_cols
+]
+.
+describe
+()
+.
+round
+(
+4
+)
+.
+loc
+[[
+'mean'
+,
+'std'
+,
+'min'
+,
+'max'
+]])
+# Optional: Save the fully preprocessed dataset for easy access later
+df_encoded
+.
+to_csv
+(
+'data_preprocessed.csv'
+,
+index
+=
+False
+)
+
+---BLOCK---
+
+Previous qualification (grade)
+Admission grade
+Age at enrollment
+Curricular units 1st sem (credited)
+Curricular units 1st sem (enrolled)
+Curricular units 1st sem (evaluations)
+Curricular units 1st sem (approved)
+Curricular units 1st sem (grade)
+Curricular units 1st sem (without evaluations)
+Curricular units 2nd sem (credited)
+Curricular units 2nd sem (enrolled)
+Curricular units 2nd sem (evaluations)
+Curricular units 2nd sem (approved)
+Curricular units 2nd sem (grade)
+Curricular units 2nd sem (without evaluations)
+Unemployment rate
+Inflation rate
+GDP
+mean
+-0.0000
+-0.0000
+-0.0000
+0.0000
+0.0000
+0.0000
+0.0000
+0.0000
+0.0000
+-0.0000
+0.0000
+-0.0000
+-0.0000
+-0.0000
+0.0000
+-0.0000
+0.0000
+0.0000
+std
+1.0001
+1.0001
+1.0001
+1.0001
+1.0001
+1.0001
+1.0001
+1.0001
+1.0001
+1.0001
+1.0001
+1.0001
+1.0001
+1.0001
+1.0001
+1.0001
+1.0001
+1.0001
+min
+-2.8523
+-2.2084
+-0.8258
+-0.3008
+-2.5286
+-1.9861
+-1.5213
+-2.1971
+-0.1993
+-0.2824
+-2.8383
+-2.0426
+-1.4715
+-1.9635
+-0.1994
+-1.4890
+-1.4669
+-1.7897
+max
+4.3518
+4.3522
+6.1599
+8.1729
+7.9557
+8.7830
+6.8824
+1.7002
+17.1718
+9.6220
+7.6367
+6.3171
+5.1632
+1.6009
+15.7222
+1.7397
+1.7880
+1.5456
+
+---BLOCK---
+
+Visualization
+¶
+
+---BLOCK---
+
+t-SNE
+¶
+
+---BLOCK---
+
+from
+sklearn.manifold
+import
+TSNE
+import
+matplotlib.pyplot
+as
+plt
+import
+seaborn
+as
+sns
+# Separate features (X) and target (y)
+# X contains our 248 preprocessed features
+X
+=
+df_encoded
+.
+drop
+(
+'Target'
+,
+axis
+=
+1
+)
+y
+=
+df_encoded
+[
+'Target'
+]
+print
+(
+f
+"Applying t-SNE on feature matrix of shape:
+{
+X
+.
+shape
+}
+"
+)
+print
+(
+"Please wait, t-SNE might take a minute or two to converge..."
+)
+# Initialize t-SNE
+# n_components=2 for a 2D scatter plot
+# random_state=42 ensures reproducibility so your plot looks the same every time
+# init='pca' is recommended for better stability in initialization
+tsne
+=
+TSNE
+(
+n_components
+=
+2
+,
+random_state
+=
+42
+,
+init
+=
+'pca'
+,
+learning_rate
+=
+'auto'
+)
+# Fit and transform the high-dimensional data
+X_tsne
+=
+tsne
+.
+fit_transform
+(
+X
+)
+# Create a DataFrame for easy plotting with Seaborn
+tsne_df
+=
+pd
+.
+DataFrame
+(
+data
+=
+X_tsne
+,
+columns
+=
+[
+'TSNE_Dimension_1'
+,
+'TSNE_Dimension_2'
+])
+tsne_df
+[
+'Target'
+]
+=
+y
+.
+values
+# Create the scatter plot
+plt
+.
+figure
+(
+figsize
+=
+(
+10
+,
+8
+))
+sns
+.
+scatterplot
+(
+x
+=
+'TSNE_Dimension_1'
+,
+y
+=
+'TSNE_Dimension_2'
+,
+hue
+=
+'Target'
+,
+palette
+=
+{
+'Graduate'
+:
+'#2ecc71'
+,
+'Dropout'
+:
+'#e74c3c'
+,
+'Enrolled'
+:
+'#f39c12'
+},
+# Custom colors
+data
+=
+tsne_df
+,
+alpha
+=
+0.7
+,
+# Add some transparency to see overlapping points
+s
+=
+30
+# Point size
+)
+plt
+.
+title
+(
+'t-SNE 2D Projection of Student Dropout Dataset'
+,
+fontsize
+=
+14
+,
+fontweight
+=
+'bold'
+)
+plt
+.
+xlabel
+(
+'t-SNE Dimension 1'
+,
+fontsize
+=
+12
+)
+plt
+.
+ylabel
+(
+'t-SNE Dimension 2'
+,
+fontsize
+=
+12
+)
+plt
+.
+legend
+(
+title
+=
+'Student Status'
+,
+title_fontsize
+=
+'11'
+,
+fontsize
+=
+'10'
+)
+plt
+.
+grid
+(
+True
+,
+linestyle
+=
+'--'
+,
+alpha
+=
+0.5
+)
+plt
+.
+tight_layout
+()
+plt
+.
+show
+()
+
+---BLOCK---
+
+Applying t-SNE on feature matrix of shape: (4424, 247)
+Please wait, t-SNE might take a minute or two to converge...
+
+---BLOCK---
+
+Correlation
+¶
+
+---BLOCK---
+
+import
+pandas
+as
+pd
+import
+numpy
+as
+np
+import
+matplotlib.pyplot
+as
+plt
+import
+seaborn
+as
+sns
+# 1. 提取目标变量并进行独热编码，以便计算相关性
+df_target
+=
+pd
+.
+get_dummies
+(
+df_encoded
+[
+'Target'
+],
+prefix
+=
+'Target'
+)
+# 2. 将数值特征与编码后的目标变量拼接
+df_numeric
+=
+pd
+.
+concat
+([
+df_encoded
+.
+drop
+(
+'Target'
+,
+axis
+=
+1
+),
+df_target
+],
+axis
+=
+1
+)
+# 3. 计算所有特征与 'Target_Dropout' (退学) 的皮尔逊相关系数
+corr_with_dropout
+=
+df_numeric
+.
+corr
+()[
+'Target_Dropout'
+]
+.
+drop
+([
+'Target_Dropout'
+,
+'Target_Graduate'
+,
+'Target_Enrolled'
+])
+# 4. 提取相关性最高的 Top 15 正相关 (导致退学) 和 Top 15 负相关 (避免退学) 特征
+top_pos
+=
+corr_with_dropout
+.
+nlargest
+(
+15
+)
+top_neg
+=
+corr_with_dropout
+.
+nsmallest
+(
+15
+)
+# 合并并排序，方便画图
+top_corr
+=
+pd
+.
+concat
+([
+top_pos
+,
+top_neg
+])
+.
+sort_values
+()
+# 5. 绘制精美的条形图
+plt
+.
+figure
+(
+figsize
+=
+(
+12
+,
+10
+))
+# 正相关用红色(危险)，负相关用绿色(安全)
+colors
+=
+[
+'#2ecc71'
+if
+val
+<
+0
+else
+'#e74c3c'
+for
+val
+in
+top_corr
+.
+values
+]
+sns
+.
+barplot
+(
+x
+=
+top_corr
+.
+values
+,
+y
+=
+top_corr
+.
+index
+,
+palette
+=
+colors
+)
+plt
+.
+title
+(
+'Top 30 Features Correlated with "Dropout"'
+,
+fontsize
+=
+16
+,
+fontweight
+=
+'bold'
+)
+plt
+.
+xlabel
+(
+'Pearson Correlation Coefficient'
+,
+fontsize
+=
+12
+)
+plt
+.
+ylabel
+(
+'Features'
+,
+fontsize
+=
+12
+)
+plt
+.
+axvline
+(
+x
+=
+0
+,
+color
+=
+'black'
+,
+linestyle
+=
+'-'
+,
+linewidth
+=
+1
+)
+# 画一条 0 的基准线
+plt
+.
+grid
+(
+axis
+=
+'x'
+,
+linestyle
+=
+'--'
+,
+alpha
+=
+0.7
+)
+plt
+.
+tight_layout
+()
+plt
+.
+show
+()
+# 提取这些最佳特征的名称，供后续使用
+best_features_dropout
+=
+top_corr
+.
+index
+.
+tolist
+()
+
+---BLOCK---
+
+C:\Users\CosmosMount\AppData\Local\Temp\ipykernel_33000\4127994247.py:27: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `y` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.barplot(x=top_corr.values, y=top_corr.index, palette=colors)
+
+---BLOCK---
+
+import
+pandas
+as
+pd
+import
+numpy
+as
+np
+import
+matplotlib.pyplot
+as
+plt
+import
+seaborn
+as
+sns
+# 1. 提取目标变量并进行独热编码，以便计算相关性
+df_target
+=
+pd
+.
+get_dummies
+(
+df_encoded
+[
+'Target'
+],
+prefix
+=
+'Target'
+)
+# 2. 将数值特征与编码后的目标变量拼接
+df_numeric
+=
+pd
+.
+concat
+([
+df_encoded
+.
+drop
+(
+'Target'
+,
+axis
+=
+1
+),
+df_target
+],
+axis
+=
+1
+)
+# 3. 计算所有特征与 'Target_Graduate' (毕业) 的皮尔逊相关系数
+corr_with_graduate
+=
+df_numeric
+.
+corr
+()[
+'Target_Graduate'
+]
+.
+drop
+([
+'Target_Dropout'
+,
+'Target_Graduate'
+,
+'Target_Enrolled'
+])
+# 4. 提取相关性最高的 Top 15 正相关 (导致退学) 和 Top 15 负相关 (避免退学) 特征
+top_pos
+=
+corr_with_graduate
+.
+nlargest
+(
+15
+)
+top_neg
+=
+corr_with_graduate
+.
+nsmallest
+(
+15
+)
+# 合并并排序，方便画图
+top_corr
+=
+pd
+.
+concat
+([
+top_pos
+,
+top_neg
+])
+.
+sort_values
+()
+# 5. 绘制精美的条形图
+plt
+.
+figure
+(
+figsize
+=
+(
+12
+,
+10
+))
+# 正相关用红色(危险)，负相关用绿色(安全)
+colors
+=
+[
+'#2ecc71'
+if
+val
+>
+0
+else
+'#e74c3c'
+for
+val
+in
+top_corr
+.
+values
+]
+sns
+.
+barplot
+(
+x
+=
+top_corr
+.
+values
+,
+y
+=
+top_corr
+.
+index
+,
+palette
+=
+colors
+)
+plt
+.
+title
+(
+'Top 30 Features Correlated with "Graduate"'
+,
+fontsize
+=
+16
+,
+fontweight
+=
+'bold'
+)
+plt
+.
+xlabel
+(
+'Pearson Correlation Coefficient'
+,
+fontsize
+=
+12
+)
+plt
+.
+ylabel
+(
+'Features'
+,
+fontsize
+=
+12
+)
+plt
+.
+axvline
+(
+x
+=
+0
+,
+color
+=
+'black'
+,
+linestyle
+=
+'-'
+,
+linewidth
+=
+1
+)
+# 画一条 0 的基准线
+plt
+.
+grid
+(
+axis
+=
+'x'
+,
+linestyle
+=
+'--'
+,
+alpha
+=
+0.7
+)
+plt
+.
+tight_layout
+()
+plt
+.
+show
+()
+# 提取这些最佳特征的名称，供后续使用
+best_features_graduate
+=
+top_corr
+.
+index
+.
+tolist
+()
+
+---BLOCK---
+
+C:\Users\CosmosMount\AppData\Local\Temp\ipykernel_33000\2798159382.py:27: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `y` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.barplot(x=top_corr.values, y=top_corr.index, palette=colors)
+
+---BLOCK---
+
+best_features
+=
+list
+(
+set
+(
+best_features_dropout
+)
+&
+set
+(
+best_features_graduate
+))
+print
+(
+"common features (best_features):"
+)
+print
+(
+best_features
+)
+print
+(
+"
+\n
+dropout only:"
+)
+print
+(
+list
+(
+set
+(
+best_features_dropout
+)
+-
+set
+(
+best_features_graduate
+)))
+print
+(
+"
+\n
+graduate only:"
+)
+print
+(
+list
+(
+set
+(
+best_features_graduate
+)
+-
+set
+(
+best_features_dropout
+)))
+
+---BLOCK---
+
+common features (best_features):
+['Application mode_1', 'Scholarship holder', 'Curricular units 2nd sem (grade)', 'Curricular units 1st sem (grade)', "Mother's occupation_0", 'Age at enrollment', 'Gender', "Father's qualification_34", 'Displaced', 'Course_9500', "Mother's qualification_34", 'Course_9991', 'Curricular units 2nd sem (enrolled)', 'Application mode_39', 'Curricular units 1st sem (enrolled)', 'Curricular units 1st sem (approved)', 'Admission grade', 'Debtor', 'Curricular units 2nd sem (approved)', 'Tuition fees up to date', 'Previous qualification_1', 'Previous qualification_19']
+
+ dropout only:
+["Father's occupation_0", 'Application mode_7', "Father's occupation_90", 'Marital status_2', 'Previous qualification_3', 'Marital status_1', 'Curricular units 2nd sem (evaluations)', "Mother's occupation_90"]
+
+ graduate only:
+['Course_9238', 'Curricular units 1st sem (without evaluations)', 'Previous qualification (grade)', 'Curricular units 2nd sem (without evaluations)', 'Course_9147', 'Course_9119', 'Course_9853', 'Course_9130']
+
+---BLOCK---
+
+Experiments
+¶
+
+---BLOCK---
+
+K-means with all features
+¶
+
+---BLOCK---
+
+from
+sklearn.cluster
+import
+KMeans
+from
+sklearn.metrics
+import
+silhouette_score
+,
+adjusted_rand_score
+,
+normalized_mutual_info_score
+,
+accuracy_score
+import
+matplotlib.pyplot
+as
+plt
+import
+seaborn
+as
+sns
+# Ensure X contains only the features (248 columns), dropping the Target
+X
+=
+df_encoded
+.
+drop
+(
+'Target'
+,
+axis
+=
+1
+)
+# 1. Initialize and fit K-Means with k=2
+# n_init=10 runs the algorithm 10 times with different centroid seeds to find the best output
+kmeans
+=
+KMeans
+(
+n_clusters
+=
+2
+,
+random_state
+=
+42
+,
+n_init
+=
+10
+)
+cluster_labels
+=
+kmeans
+.
+fit_predict
+(
+X
+)
+# 2. Evaluate using Silhouette Score
+# A score closer to 1 indicates dense, well-separated clusters
+sil_score
+=
+silhouette_score
+(
+X
+,
+cluster_labels
+)
+print
+(
+f
+"--- K-Means Evaluation ---"
+)
+print
+(
+f
+"Silhouette Score for k=2:
+{
+sil_score
+:
+.4f
+}
+"
+)
+# 3. More evaluation metrics using ground truth
+# Convert ground truth to binary: e.g., Dropout=1, others=0 (or adjust as needed)
+ground_truth
+=
+(
+df_encoded
+[
+'Target'
+]
+==
+'Dropout'
+)
+.
+astype
+(
+int
+)
+# Cluster labels may not match ground truth label order, so try both mappings
+acc1
+=
+accuracy_score
+(
+ground_truth
+,
+cluster_labels
+)
+acc2
+=
+accuracy_score
+(
+ground_truth
+,
+1
+-
+cluster_labels
+)
+acc
+=
+max
+(
+acc1
+,
+acc2
+)
+ari
+=
+adjusted_rand_score
+(
+ground_truth
+,
+cluster_labels
+)
+nmi
+=
+normalized_mutual_info_score
+(
+ground_truth
+,
+cluster_labels
+)
+print
+(
+f
+"Accuracy (best mapping):
+{
+acc
+:
+.4f
+}
+"
+)
+print
+(
+f
+"Adjusted Rand Index:
+{
+ari
+:
+.4f
+}
+"
+)
+print
+(
+f
+"Normalized Mutual Information:
+{
+nmi
+:
+.4f
+}
+"
+)
+# 4. Visualize the clusters using the t-SNE coordinates from Task 2
+# We add the new cluster labels to our existing tsne_df
+tsne_df
+[
+'KMeans_Cluster'
+]
+=
+cluster_labels
+tsne_df
+[
+'KMeans_Cluster'
+]
+=
+tsne_df
+[
+'KMeans_Cluster'
+]
+.
+astype
+(
+str
+)
+plt
+.
+figure
+(
+figsize
+=
+(
+10
+,
+8
+))
+sns
+.
+scatterplot
+(
+x
+=
+'TSNE_Dimension_1'
+,
+y
+=
+'TSNE_Dimension_2'
+,
+hue
+=
+'KMeans_Cluster'
+,
+palette
+=
+[
+'#3498db'
+,
+"#ead413"
+],
+# Blue and Purple for the two clusters
+data
+=
+tsne_df
+,
+alpha
+=
+0.7
+,
+s
+=
+30
+)
+plt
+.
+title
+(
+'K-Means Clustering (k=2) Mapped on t-SNE Projection'
+,
+fontsize
+=
+14
+,
+fontweight
+=
+'bold'
+)
+plt
+.
+xlabel
+(
+'t-SNE Dimension 1'
+,
+fontsize
+=
+12
+)
+plt
+.
+ylabel
+(
+'t-SNE Dimension 2'
+,
+fontsize
+=
+12
+)
+plt
+.
+legend
+(
+title
+=
+'K-Means Cluster'
+,
+title_fontsize
+=
+'11'
+,
+fontsize
+=
+'10'
+)
+plt
+.
+grid
+(
+True
+,
+linestyle
+=
+'--'
+,
+alpha
+=
+0.5
+)
+plt
+.
+tight_layout
+()
+plt
+.
+show
+()
+
+---BLOCK---
+
+--- K-Means Evaluation ---
+Silhouette Score for k=2: 0.3636
+Accuracy (best mapping): 0.6453
+Adjusted Rand Index: -0.0138
+Normalized Mutual Information: 0.0025
+
+---BLOCK---
+
+K-means with selected feature
+¶
+
+---BLOCK---
+
+from
+sklearn.cluster
+import
+KMeans
+from
+sklearn.metrics
+import
+silhouette_score
+import
+matplotlib.pyplot
+as
+plt
+import
+seaborn
+as
+sns
+X_selected
+=
+df_encoded
+[
+best_features
+]
+kmeans_selected
+=
+KMeans
+(
+n_clusters
+=
+2
+,
+random_state
+=
+42
+,
+n_init
+=
+10
+)
+cluster_labels_km_selected
+=
+kmeans_selected
+.
+fit_predict
+(
+X_selected
+)
+sil_score_km_selected
+=
+silhouette_score
+(
+X_selected
+,
+cluster_labels_km_selected
+)
+print
+(
+f
+"--- K-Means Evaluation (Using Top 30 Features) ---"
+)
+print
+(
+f
+"Silhouette Score for k=2:
+{
+sil_score_km_selected
+:
+.4f
+}
+"
+)
+# 3. More evaluation metrics using ground truth
+# Convert ground truth to binary: e.g., Dropout=1, others=0 (or adjust as needed)
+dropout_ground_truth
+=
+(
+df_encoded
+[
+'Target'
+]
+==
+'Dropout'
+)
+.
+astype
+(
+int
+)
+# Cluster labels may not match ground truth label order, so try both mappings
+acc1
+=
+accuracy_score
+(
+dropout_ground_truth
+,
+cluster_labels_km_selected
+)
+acc2
+=
+accuracy_score
+(
+dropout_ground_truth
+,
+1
+-
+cluster_labels_km_selected
+)
+acc
+=
+max
+(
+acc1
+,
+acc2
+)
+ari
+=
+adjusted_rand_score
+(
+dropout_ground_truth
+,
+cluster_labels_km_selected
+)
+nmi
+=
+normalized_mutual_info_score
+(
+dropout_ground_truth
+,
+cluster_labels_km_selected
+)
+print
+(
+f
+"Dropout Label Accuracy (best mapping):
+{
+acc
+:
+.4f
+}
+"
+)
+print
+(
+f
+"Dropout Label Adjusted Rand Index:
+{
+ari
+:
+.4f
+}
+"
+)
+print
+(
+f
+"Dropout Label Normalized Mutual Information:
+{
+nmi
+:
+.4f
+}
+"
+)
+graduate_ground_truth
+=
+(
+df_encoded
+[
+'Target'
+]
+==
+'Graduate'
+)
+.
+astype
+(
+int
+)
+acc1
+=
+accuracy_score
+(
+graduate_ground_truth
+,
+cluster_labels_km_selected
+)
+acc2
+=
+accuracy_score
+(
+graduate_ground_truth
+,
+1
+-
+cluster_labels_km_selected
+)
+acc
+=
+max
+(
+acc1
+,
+acc2
+)
+ari
+=
+adjusted_rand_score
+(
+graduate_ground_truth
+,
+cluster_labels_km_selected
+)
+nmi
+=
+normalized_mutual_info_score
+(
+graduate_ground_truth
+,
+cluster_labels_km_selected
+)
+print
+(
+f
+"Graduate Label Accuracy (best mapping):
+{
+acc
+:
+.4f
+}
+"
+)
+print
+(
+f
+"Graduate Label Adjusted Rand Index:
+{
+ari
+:
+.4f
+}
+"
+)
+print
+(
+f
+"Graduate Label Normalized Mutual Information:
+{
+nmi
+:
+.4f
+}
+"
+)
+tsne_df
+[
+'KMeans_Optimized_Cluster'
+]
+=
+cluster_labels_km_selected
+tsne_df
+[
+'KMeans_Optimized_Cluster'
+]
+=
+tsne_df
+[
+'KMeans_Optimized_Cluster'
+]
+.
+astype
+(
+str
+)
+plt
+.
+figure
+(
+figsize
+=
+(
+10
+,
+8
+))
+sns
+.
+scatterplot
+(
+x
+=
+'TSNE_Dimension_1'
+,
+y
+=
+'TSNE_Dimension_2'
+,
+hue
+=
+'KMeans_Optimized_Cluster'
+,
+palette
+=
+[
+'#3498db'
+,
+'#e74c3c'
+],
+data
+=
+tsne_df
+,
+alpha
+=
+0.7
+,
+s
+=
+30
+)
+plt
+.
+title
+(
+'Optimized K-Means (Top 30 Features) mapped on t-SNE'
+,
+fontsize
+=
+14
+,
+fontweight
+=
+'bold'
+)
+plt
+.
+xlabel
+(
+'t-SNE Dimension 1'
+,
+fontsize
+=
+12
+)
+plt
+.
+ylabel
+(
+'t-SNE Dimension 2'
+,
+fontsize
+=
+12
+)
+plt
+.
+legend
+(
+title
+=
+'Optimized Cluster'
+,
+title_fontsize
+=
+'11'
+,
+fontsize
+=
+'10'
+)
+plt
+.
+grid
+(
+True
+,
+linestyle
+=
+'--'
+,
+alpha
+=
+0.5
+)
+plt
+.
+tight_layout
+()
+plt
+.
+show
+()
+
+---BLOCK---
+
+--- K-Means Evaluation (Using Top 30 Features) ---
+Silhouette Score for k=2: 0.3931
+Dropout Label Accuracy (best mapping): 0.8124
+Dropout Label Adjusted Rand Index: 0.3624
+Dropout Label Normalized Mutual Information: 0.2549
+Graduate Label Accuracy (best mapping): 0.6722
+Graduate Label Adjusted Rand Index: 0.1185
+Graduate Label Normalized Mutual Information: 0.1709
+
+---BLOCK---
+
+Hierarchical Clustering
+¶
+
+---BLOCK---
+
+from
+sklearn.cluster
+import
+AgglomerativeClustering
+from
+sklearn.metrics
+import
+silhouette_score
+import
+matplotlib.pyplot
+as
+plt
+import
+seaborn
+as
+sns
+# 1. 使用相同的 30 个精选特征
+X_selected
+=
+df_encoded
+[
+best_features
+]
+# 2. 初始化并运行层次聚类 (k=2)
+# linkage='ward' 效果通常最稳健
+hc
+=
+AgglomerativeClustering
+(
+n_clusters
+=
+2
+,
+linkage
+=
+'ward'
+)
+cluster_labels_hc
+=
+hc
+.
+fit_predict
+(
+X_selected
+)
+# 3. 评估聚类质量 (Silhouette Score)
+sil_score_hc
+=
+silhouette_score
+(
+X_selected
+,
+cluster_labels_hc
+)
+print
+(
+f
+"--- Hierarchical Clustering (HC) Evaluation ---"
+)
+print
+(
+f
+"Silhouette Score (Top 30 Features):
+{
+sil_score_hc
+:
+.4f
+}
+"
+)
+print
+(
+f
+"Recall: Optimized K-Means Score was:
+{
+sil_score_km_selected
+:
+.4f
+}
+"
+)
+# 4. 可视化：将 HC 的聚类结果映射到 t-SNE 坐标上
+tsne_df
+[
+'HC_Cluster'
+]
+=
+cluster_labels_hc
+.
+astype
+(
+str
+)
+plt
+.
+figure
+(
+figsize
+=
+(
+10
+,
+8
+))
+sns
+.
+scatterplot
+(
+x
+=
+'TSNE_Dimension_1'
+,
+y
+=
+'TSNE_Dimension_2'
+,
+hue
+=
+'HC_Cluster'
+,
+palette
+=
+[
+'#e67e22'
+,
+'#1abc9c'
+],
+# 橙色和青色，区别于 K-Means 的颜色
+data
+=
+tsne_df
+,
+alpha
+=
+0.7
+,
+s
+=
+30
+)
+plt
+.
+title
+(
+'Hierarchical Clustering (Top 30 Features) on t-SNE'
+,
+fontsize
+=
+14
+,
+fontweight
+=
+'bold'
+)
+plt
+.
+xlabel
+(
+'t-SNE Dimension 1'
+,
+fontsize
+=
+12
+)
+plt
+.
+ylabel
+(
+'t-SNE Dimension 2'
+,
+fontsize
+=
+12
+)
+plt
+.
+legend
+(
+title
+=
+'HC Cluster'
+,
+title_fontsize
+=
+'11'
+,
+fontsize
+=
+'10'
+)
+plt
+.
+grid
+(
+True
+,
+linestyle
+=
+'--'
+,
+alpha
+=
+0.5
+)
+plt
+.
+tight_layout
+()
+plt
+.
+show
+()
+
+---BLOCK---
+
+--- Hierarchical Clustering (HC) Evaluation ---
+Silhouette Score (Top 30 Features): 0.3935
+Recall: Optimized K-Means Score was: 0.3931
+
+---BLOCK---
+
+Prediction
+¶
+
+---BLOCK---
+
+Decision Tree of 3 classes
+¶
+
+---BLOCK---
+
+import
+pandas
+as
+pd
+from
+sklearn.model_selection
+import
+train_test_split
+from
+sklearn.tree
+import
+DecisionTreeClassifier
+from
+sklearn.metrics
+import
+accuracy_score
+,
+confusion_matrix
+from
+sklearn.preprocessing
+import
+LabelEncoder
+import
+matplotlib.pyplot
+as
+plt
+import
+seaborn
+as
+sns
+# 1. 准备特征(X)和目标(y)
+X
+=
+df_encoded
+.
+drop
+(
+'Target'
+,
+axis
+=
+1
+)
+y_raw
+=
+df_encoded
+[
+'Target'
+]
+# 将字符串目标 ('Dropout', 'Enrolled', 'Graduate') 编码为数字 (0, 1, 2)
+le
+=
+LabelEncoder
+()
+y
+=
+le
+.
+fit_transform
+(
+y_raw
+)
+target_names
+=
+le
+.
+classes_
+print
+(
+f
+"Target mapping:
+{
+dict
+(
+zip
+(
+range
+(
+len
+(
+target_names
+)),
+target_names
+))
+}
+"
+)
+# 2. 拆分数据集 (70% 训练, 30% 测试)
+# stratify=y 确保训练集和测试集中各类的比例与原数据一致
+X_train
+,
+X_test
+,
+y_train
+,
+y_test
+=
+train_test_split
+(
+X
+,
+y
+,
+test_size
+=
+0.3
+,
+random_state
+=
+42
+,
+stratify
+=
+y
+)
+# 3. 初始化并训练决策树模型
+# 设置 max_depth=5 以防止严重的过拟合
+dt_model
+=
+DecisionTreeClassifier
+(
+random_state
+=
+42
+,
+max_depth
+=
+5
+)
+dt_model
+.
+fit
+(
+X_train
+,
+y_train
+)
+# 4. 在训练集、测试集、全量集上进行预测
+y_train_pred
+=
+dt_model
+.
+predict
+(
+X_train
+)
+y_test_pred
+=
+dt_model
+.
+predict
+(
+X_test
+)
+y_all_pred
+=
+dt_model
+.
+predict
+(
+X
+)
+# 计算准确率
+acc_train
+=
+accuracy_score
+(
+y_train
+,
+y_train_pred
+)
+acc_test
+=
+accuracy_score
+(
+y_test
+,
+y_test_pred
+)
+acc_all
+=
+accuracy_score
+(
+y
+,
+y_all_pred
+)
+print
+(
+f
+"
+\n
+--- Decision Tree Accuracy Scores ---"
+)
+print
+(
+f
+"Training Set (70%):
+{
+acc_train
+:
+.4f
+}
+"
+)
+print
+(
+f
+"Testing Set  (30%):
+{
+acc_test
+:
+.4f
+}
+"
+)
+print
+(
+f
+"Entire Set  (100%):
+{
+acc_all
+:
+.4f
+}
+"
+)
+# 5. 绘制测试集的混淆矩阵 (Confusion Matrix)
+cm_test
+=
+confusion_matrix
+(
+y_test
+,
+y_test_pred
+)
+plt
+.
+figure
+(
+figsize
+=
+(
+8
+,
+6
+))
+sns
+.
+heatmap
+(
+cm_test
+,
+annot
+=
+True
+,
+fmt
+=
+'d'
+,
+cmap
+=
+'Blues'
+,
+xticklabels
+=
+target_names
+,
+yticklabels
+=
+target_names
+)
+plt
+.
+title
+(
+'Decision Tree Confusion Matrix (Testing Set)'
+,
+fontsize
+=
+14
+,
+fontweight
+=
+'bold'
+)
+plt
+.
+ylabel
+(
+'Actual Label'
+,
+fontsize
+=
+12
+)
+plt
+.
+xlabel
+(
+'Predicted Label'
+,
+fontsize
+=
+12
+)
+plt
+.
+tight_layout
+()
+plt
+.
+show
+()
+
+---BLOCK---
+
+Target mapping: {0: 'Dropout', 1: 'Enrolled', 2: 'Graduate'}
+
+--- Decision Tree Accuracy Scores ---
+Training Set (70%): 0.7652
+Testing Set  (30%): 0.7417
+Entire Set  (100%): 0.7581
+
+---BLOCK---
+
+Decision Tree of 2 classes
+¶
+
+---BLOCK---
+
+from
+sklearn.model_selection
+import
+train_test_split
+from
+sklearn.tree
+import
+DecisionTreeClassifier
+from
+sklearn.metrics
+import
+accuracy_score
+,
+confusion_matrix
+,
+classification_report
+# 1. 过滤数据：只保留 Graduate 和 Dropout
+df_binary
+=
+df_encoded
+[
+df_encoded
+[
+'Target'
+]
+!=
+'Enrolled'
+]
+.
+copy
+()
+# 2. 只选用 best_features 作为特征
+X_bin
+=
+df_binary
+[
+best_features
+]
+y_bin_raw
+=
+df_binary
+[
+'Target'
+]
+# 3. 将标签转换为 0 (Dropout) 和 1 (Graduate)
+# 这样在混淆矩阵和 ROC 曲线中更直观
+y_bin
+=
+y_bin_raw
+.
+map
+({
+'Dropout'
+:
+0
+,
+'Graduate'
+:
+1
+})
+print
+(
+f
+"New dataset shape for binary classification (using best_features):
+{
+X_bin
+.
+shape
+}
+"
+)
+# 拆分二分类数据集 (70% 训练, 30% 测试)
+X_train_bin
+,
+X_test_bin
+,
+y_train_bin
+,
+y_test_bin
+=
+train_test_split
+(
+X_bin
+,
+y_bin
+,
+test_size
+=
+0.3
+,
+random_state
+=
+42
+,
+stratify
+=
+y_bin
+)
+# 训练决策树
+dt_bin
+=
+DecisionTreeClassifier
+(
+max_depth
+=
+5
+,
+random_state
+=
+42
+)
+dt_bin
+.
+fit
+(
+X_train_bin
+,
+y_train_bin
+)
+# 评估
+y_test_pred_bin
+=
+dt_bin
+.
+predict
+(
+X_test_bin
+)
+print
+(
+f
+"Binary Classification Accuracy (using best_features):
+{
+accuracy_score
+(
+y_test_bin
+,
+y_test_pred_bin
+)
+:
+.4f
+}
+"
+)
+print
+(
+"
+\n
+Classification Report:"
+)
+print
+(
+classification_report
+(
+y_test_bin
+,
+y_test_pred_bin
+,
+target_names
+=
+[
+'Dropout'
+,
+'Graduate'
+]))
+
+---BLOCK---
+
+New dataset shape for binary classification (using best_features): (3630, 22)
+Binary Classification Accuracy (using best_features): 0.9036
+
+Classification Report:
+              precision    recall  f1-score   support
+
+     Dropout       0.94      0.81      0.87       426
+    Graduate       0.89      0.97      0.92       663
+
+    accuracy                           0.90      1089
+   macro avg       0.91      0.89      0.90      1089
+weighted avg       0.91      0.90      0.90      1089
+
+---BLOCK---
+
+Logistic Regression
+¶
+
+---BLOCK---
+
+from
+sklearn.linear_model
+import
+LogisticRegression
+from
+sklearn.metrics
+import
+accuracy_score
+,
+confusion_matrix
+,
+classification_report
+import
+matplotlib.pyplot
+as
+plt
+import
+seaborn
+as
+sns
+# 1. 过滤数据：只保留 Graduate 和 Dropout
+df_binary
+=
+df_encoded
+[
+df_encoded
+[
+'Target'
+]
+!=
+'Enrolled'
+]
+.
+copy
+()
+# 2. 只选用 best_features 作为特征
+X_bin
+=
+df_binary
+[
+best_features
+]
+y_bin_raw
+=
+df_binary
+[
+'Target'
+]
+# 3. 将标签转换为 0 (Dropout) 和 1 (Graduate)
+# 这样在混淆矩阵和 ROC 曲线中更直观
+y_bin
+=
+y_bin_raw
+.
+map
+({
+'Dropout'
+:
+0
+,
+'Graduate'
+:
+1
+})
+# 2. 重新拆分数据集 (70% 训练, 30% 测试)
+X_train_bin
+,
+X_test_bin
+,
+y_train_bin
+,
+y_test_bin
+=
+train_test_split
+(
+X_bin
+,
+y_bin
+,
+test_size
+=
+0.3
+,
+random_state
+=
+42
+,
+stratify
+=
+y_bin
+)
+# 3. 初始化并训练逻辑回归模型
+# max_iter 设置大一点确保模型收敛
+lr_model
+=
+LogisticRegression
+(
+max_iter
+=
+1000
+,
+random_state
+=
+42
+)
+lr_model
+.
+fit
+(
+X_train_bin
+,
+y_train_bin
+)
+# 4. 预测与评估
+y_train_pred_lr
+=
+lr_model
+.
+predict
+(
+X_train_bin
+)
+y_test_pred_lr
+=
+lr_model
+.
+predict
+(
+X_test_bin
+)
+acc_train_lr
+=
+accuracy_score
+(
+y_train_bin
+,
+y_train_pred_lr
+)
+acc_test_lr
+=
+accuracy_score
+(
+y_test_bin
+,
+y_test_pred_lr
+)
+print
+(
+f
+"--- Logistic Regression Accuracy (Binary) ---"
+)
+print
+(
+f
+"Training Set:
+{
+acc_train_lr
+:
+.4f
+}
+"
+)
+print
+(
+f
+"Testing Set:
+{
+acc_test_lr
+:
+.4f
+}
+"
+)
+# 5. 打印详细的分类报告
+print
+(
+"
+\n
+Classification Report (Testing Set):"
+)
+print
+(
+classification_report
+(
+y_test_bin
+,
+y_test_pred_lr
+,
+target_names
+=
+[
+'Dropout'
+,
+'Graduate'
+]))
+# 6. 绘制混淆矩阵
+cm_lr
+=
+confusion_matrix
+(
+y_test_bin
+,
+y_test_pred_lr
+)
+plt
+.
+figure
+(
+figsize
+=
+(
+8
+,
+6
+))
+sns
+.
+heatmap
+(
+cm_lr
+,
+annot
+=
+True
+,
+fmt
+=
+'d'
+,
+cmap
+=
+'Greens'
+,
+xticklabels
+=
+[
+'Dropout'
+,
+'Graduate'
+],
+yticklabels
+=
+[
+'Dropout'
+,
+'Graduate'
+])
+plt
+.
+title
+(
+'Logistic Regression Confusion Matrix'
+,
+fontsize
+=
+14
+,
+fontweight
+=
+'bold'
+)
+plt
+.
+ylabel
+(
+'Actual Label'
+)
+plt
+.
+xlabel
+(
+'Predicted Label'
+)
+plt
+.
+tight_layout
+()
+plt
+.
+show
+()
+
+---BLOCK---
+
+--- Logistic Regression Accuracy (Binary) ---
+Training Set: 0.9162
+Testing Set:  0.9164
+
+Classification Report (Testing Set):
+              precision    recall  f1-score   support
+
+     Dropout       0.95      0.83      0.89       426
+    Graduate       0.90      0.97      0.93       663
+
+    accuracy                           0.92      1089
+   macro avg       0.92      0.90      0.91      1089
+weighted avg       0.92      0.92      0.92      1089
+
+---BLOCK---
+
+SVM with best features
+¶
+
+---BLOCK---
+
+from
+sklearn.svm
+import
+SVC
+from
+sklearn.metrics
+import
+accuracy_score
+,
+confusion_matrix
+,
+classification_report
+import
+matplotlib.pyplot
+as
+plt
+import
+seaborn
+as
+sns
+# 1. 初始化 SVM 模型
+# kernel='linear': 线性核函数，适合高维特征空间
+# C=1.0: 正则化参数，平衡间隔大小与分类准确度
+svm_model
+=
+SVC
+(
+kernel
+=
+'linear'
+,
+probability
+=
+True
+,
+random_state
+=
+42
+)
+# 2. 在之前定义的二分类训练集上进行训练
+# (确保你已经运行了之前的 X_train_bin 和 y_train_bin 代码)
+svm_model
+.
+fit
+(
+X_train_bin
+,
+y_train_bin
+)
+# 3. 预测与评估
+y_train_pred_svm
+=
+svm_model
+.
+predict
+(
+X_train_bin
+)
+y_test_pred_svm
+=
+svm_model
+.
+predict
+(
+X_test_bin
+)
+acc_train_svm
+=
+accuracy_score
+(
+y_train_bin
+,
+y_train_pred_svm
+)
+acc_test_svm
+=
+accuracy_score
+(
+y_test_bin
+,
+y_test_pred_svm
+)
+print
+(
+f
+"--- Support Vector Machine (SVM) Accuracy ---"
+)
+print
+(
+f
+"Training Set Accuracy:
+{
+acc_train_svm
+:
+.4f
+}
+"
+)
+print
+(
+f
+"Testing Set Accuracy:
+{
+acc_test_svm
+:
+.4f
+}
+"
+)
+# 4. 打印详细分类报告
+print
+(
+"
+\n
+SVM Classification Report (Testing Set):"
+)
+print
+(
+classification_report
+(
+y_test_bin
+,
+y_test_pred_svm
+,
+target_names
+=
+[
+'Dropout'
+,
+'Graduate'
+]))
+# 5. 绘制 SVM 的混淆矩阵
+cm_svm
+=
+confusion_matrix
+(
+y_test_bin
+,
+y_test_pred_svm
+)
+plt
+.
+figure
+(
+figsize
+=
+(
+8
+,
+6
+))
+sns
+.
+heatmap
+(
+cm_svm
+,
+annot
+=
+True
+,
+fmt
+=
+'d'
+,
+cmap
+=
+'Purples'
+,
+xticklabels
+=
+[
+'Dropout'
+,
+'Graduate'
+],
+yticklabels
+=
+[
+'Dropout'
+,
+'Graduate'
+])
+plt
+.
+title
+(
+'SVM Confusion Matrix (Linear Kernel)'
+,
+fontsize
+=
+14
+,
+fontweight
+=
+'bold'
+)
+plt
+.
+ylabel
+(
+'Actual Label'
+)
+plt
+.
+xlabel
+(
+'Predicted Label'
+)
+plt
+.
+tight_layout
+()
+plt
+.
+show
+()
+
+---BLOCK---
+
+--- Support Vector Machine (SVM) Accuracy ---
+Training Set Accuracy: 0.9115
+Testing Set Accuracy:  0.9128
+
+SVM Classification Report (Testing Set):
+              precision    recall  f1-score   support
+
+     Dropout       0.96      0.81      0.88       426
+    Graduate       0.89      0.98      0.93       663
+
+    accuracy                           0.91      1089
+   macro avg       0.93      0.89      0.91      1089
+weighted avg       0.92      0.91      0.91      1089
+
+---BLOCK---
+
+SVM for all features
+¶
+
+---BLOCK---
+
+from
+sklearn.svm
+import
+SVC
+from
+sklearn.metrics
+import
+accuracy_score
+,
+confusion_matrix
+,
+classification_report
+import
+matplotlib.pyplot
+as
+plt
+import
+seaborn
+as
+sns
+# 1. 初始化 SVM 模型
+# kernel='linear': 线性核函数，适合高维特征空间
+# C=1.0: 正则化参数，平衡间隔大小与分类准确度
+svm_model
+=
+SVC
+(
+kernel
+=
+'linear'
+,
+probability
+=
+True
+,
+random_state
+=
+42
+)
+# 2. 在之前定义的二分类训练集上进行训练
+# (确保你已经运行了之前的 X_train_bin 和 y_train_bin 代码)
+# 1. 过滤数据：只保留 Graduate 和 Dropout
+df_binary
+=
+df_encoded
+[
+df_encoded
+[
+'Target'
+]
+!=
+'Enrolled'
+]
+.
+copy
+()
+# 2. 只选用 best_features 作为特征
+X_bin
+=
+df_binary
+.
+drop
+(
+'Target'
+,
+axis
+=
+1
+)
+y_bin
+=
+df_binary
+[
+'Target'
+]
+.
+map
+({
+'Dropout'
+:
+0
+,
+'Graduate'
+:
+1
+})
+# 2. 重新拆分数据集 (70% 训练, 30% 测试)
+X_train_bin
+,
+X_test_bin
+,
+y_train_bin
+,
+y_test_bin
+=
+train_test_split
+(
+X_bin
+,
+y_bin
+,
+test_size
+=
+0.3
+,
+random_state
+=
+42
+,
+stratify
+=
+y_bin
+)
+svm_model
+.
+fit
+(
+X_train_bin
+,
+y_train_bin
+)
+# 3. 预测与评估
+y_train_pred_svm
+=
+svm_model
+.
+predict
+(
+X_train_bin
+)
+y_test_pred_svm
+=
+svm_model
+.
+predict
+(
+X_test_bin
+)
+acc_train_svm
+=
+accuracy_score
+(
+y_train_bin
+,
+y_train_pred_svm
+)
+acc_test_svm
+=
+accuracy_score
+(
+y_test_bin
+,
+y_test_pred_svm
+)
+print
+(
+f
+"--- Support Vector Machine (SVM) Accuracy ---"
+)
+print
+(
+f
+"Training Set Accuracy:
+{
+acc_train_svm
+:
+.4f
+}
+"
+)
+print
+(
+f
+"Testing Set Accuracy:
+{
+acc_test_svm
+:
+.4f
+}
+"
+)
+# 4. 打印详细分类报告
+print
+(
+"
+\n
+SVM Classification Report (Testing Set):"
+)
+print
+(
+classification_report
+(
+y_test_bin
+,
+y_test_pred_svm
+,
+target_names
+=
+[
+'Dropout'
+,
+'Graduate'
+]))
+# 5. 绘制 SVM 的混淆矩阵
+cm_svm
+=
+confusion_matrix
+(
+y_test_bin
+,
+y_test_pred_svm
+)
+plt
+.
+figure
+(
+figsize
+=
+(
+8
+,
+6
+))
+sns
+.
+heatmap
+(
+cm_svm
+,
+annot
+=
+True
+,
+fmt
+=
+'d'
+,
+cmap
+=
+'Purples'
+,
+xticklabels
+=
+[
+'Dropout'
+,
+'Graduate'
+],
+yticklabels
+=
+[
+'Dropout'
+,
+'Graduate'
+])
+plt
+.
+title
+(
+'SVM Confusion Matrix (Linear Kernel)'
+,
+fontsize
+=
+14
+,
+fontweight
+=
+'bold'
+)
+plt
+.
+ylabel
+(
+'Actual Label'
+)
+plt
+.
+xlabel
+(
+'Predicted Label'
+)
+plt
+.
+tight_layout
+()
+plt
+.
+show
+()
+
+---BLOCK---
+
+--- Support Vector Machine (SVM) Accuracy ---
+Training Set Accuracy: 0.9347
+Testing Set Accuracy:  0.9063
+
+SVM Classification Report (Testing Set):
+              precision    recall  f1-score   support
+
+     Dropout       0.92      0.83      0.87       426
+    Graduate       0.90      0.96      0.93       663
+
+    accuracy                           0.91      1089
+   macro avg       0.91      0.89      0.90      1089
+weighted avg       0.91      0.91      0.91      1089
